@@ -14,7 +14,7 @@ Nesta etapa foi criado a estrutura básica do Dart sem o auxílio a interface vi
 
  https://github.com/CRGlg/carlos.ribeiro.8-periodo/commit/b1b5609345f202c85be0992c80646bbb943d18dd
 
-Neste ponto foi feito uso de ......
+Neste ponto foi feito uso de elemendos de controle de dados e repetição (if/else), ......
 
 
 ## Part2;
