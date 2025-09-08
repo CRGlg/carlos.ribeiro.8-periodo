@@ -14,10 +14,10 @@ Nesta etapa foi criado a estrutura básica do Dart sem o auxílio a interface vi
 
  https://github.com/CRGlg/carlos.ribeiro.8-periodo/commit/b1b5609345f202c85be0992c80646bbb943d18dd
 
-Neste ponto foi feito uso de elemendos de controle de dados e repetição (if/else), ......
+ Neste ponto foi feito uso de elemendos de controle de dados e repetição (if/else), ......
 
 
 ## Part2;
-já na parte 2 o código teve de ser autorizado para incluir os elementos fort-end, ou seja o a implementação de flutter
+já na parte 2 o código teve de ser autorizado para incluir os elementos fort-end, ou seja o a implementação de flutter de forma que agora tem uma interface com o usuário. A interfase tem recurso visuais que são usados nas visulização dos alunos que estão no sistema e para a implementar as caixas do caracteres númericos.
 
-
+As quatro areias que são para selecionar os alunos que se emcaixão no o usuáoria determinar, as buscas poden ser feitas estabelecendo um teto e/ou chão para os critérios de 'médio' e/ou 'idade' e demais informações dos alunos sendo apresentadas nos perfis dos mesmos.
