@@ -13,3 +13,11 @@ Ne caso foi feito um sistema de munitoria de alunos de encino superior de de dif
 Nesta etapa foi criado a estrutura básica do Dart sem o auxílio a interface visual do Flutter, desta forma podendo apenas ser usado no console. O programa oferece duas opções 1 para utilizar o sistema e opção 2 para desligar o sistema, E na opção existem duas linhas de ação que podem ser toma das por curas filtrando por 'idade' ou 'média', que no caso são 'ide' e 'med' repequitivamente. Atraves das operações '>', '<', '=>' e '<=' para encontrar os estudantes que se enquadrão.
 
  https://github.com/CRGlg/carlos.ribeiro.8-periodo/commit/b1b5609345f202c85be0992c80646bbb943d18dd
+
+Neste ponto foi feito uso de ......
+
+
+## Part2;
+já na parte 2 o código teve de ser autorizado para incluir os elementos fort-end, ou seja o a implementação de flutter
+
+
