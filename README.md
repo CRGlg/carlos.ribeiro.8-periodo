@@ -1,7 +1,7 @@
 #carlos.ribeiro.8-periodo
 
-# ATIVIDADE AVALIAÇÃO PROCESSUAL
-##Computação movel // Edgard da Cunha
+<h1 align="center">  ATIVIDADE AVALIAÇÃO PROCESSUAL </h1>  
+#Computação movel // Edgard da Cunha
 
 # Sobre o trabalho
 Esta aplicação foi criada uma atividade avaliativa para o curso de sistemas de informação, com o objetivo demonstrar as habilidades no em linguagem Dart e em Flutter do alunos do turma.
