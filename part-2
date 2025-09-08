@@ -13,6 +13,8 @@ class Estudante {
   String tipo; 
 
   // O construtor inicializa um novo objeto Estudante com todos os atributos necessários.
+
+
   Estudante(this.nome, this.idade, this.curso,
       {required this.matricula, required this.mediaAluno, required this.tipo});
 }
@@ -52,6 +54,8 @@ class StudentListPage extends StatefulWidget {
   @override
   _StudentListPageState createState() => _StudentListPageState();
 }
+
+
 
 // O estado do StudentListPage.
 // É aqui que a lógica de filtragem e o gerenciamento dos dados acontecem.
@@ -106,6 +110,8 @@ class _StudentListPageState extends State<StudentListPage> {
     super.dispose();
   }
 
+
+
   // A função principal de filtragem.
   // Ela é chamada a cada digitação e atualiza o estado do widget (estudantesFiltrados).
   void _aplicarFiltros() {
@@ -132,6 +138,8 @@ class _StudentListPageState extends State<StudentListPage> {
       }).toList();
     });
   }
+
+
 
   // O método build desenha a interface do usuário.
   @override
@@ -224,6 +232,7 @@ class _StudentListPageState extends State<StudentListPage> {
           const SizedBox(height: 16),
           // ListView.builder é usado para construir uma lista eficiente,
           // criando apenas os itens que estão visíveis na tela.
+
           Expanded(
             child: ListView.builder(
               itemCount: estudantesFiltrados.length,
@@ -256,7 +265,6 @@ class _StudentListPageState extends State<StudentListPage> {
                     subtitle: Text(
                       'Idade: ${estudante.idade} | Curso: ${estudante.curso}\nMédia: ${estudante.mediaAluno} | Tipo: ${estudante.tipo.toUpperCase()}\nMatrícula: ${estudante.matricula.toInt()}',
                     ),
-                    // O ícone quadrado à direita do ListTile.
                     trailing: const Icon(Icons.square, color: Colors.red),
                   ),
                 );
