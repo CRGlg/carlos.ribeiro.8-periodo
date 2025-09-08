@@ -30,6 +30,8 @@ As quatro areias que são para selecionar os alunos que se emcaixão no o usuáo
 ![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20184554.png)
 ![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20185811.png)
 
+
+
   
   
 
