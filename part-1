@@ -1,0 +1,139 @@
+import 'dart:io';
+
+// A classe 'Estudantes' é um modelo para criar objetos que representam alunos.
+// Ela armazena informações como nome, idade, curso, matrícula e média.
+class Estudantes {
+  String nome;
+  int idade;
+  String curso;
+  int matricula;
+  double mediaAluno;
+
+  // Este é o construtor da classe. Ele é usado para inicializar um novo objeto Estudantes.
+  // Os parâmetros 'matricula' e 'mediaAluno' são nomeados e obrigatórios.
+  Estudantes(
+    this.nome,
+    this.idade,
+    this.curso, {
+    required this.matricula,
+    required this.mediaAluno,
+  });
+
+  // Este método imprime todas as informações de um estudante de forma organizada no console.
+  void apresentar() {
+    print("Nome: $nome");
+    print("Idade: $idade anos");
+    print("Curso: $curso");
+    print("Matrícula: $matricula ID");
+    print("Média: $mediaAluno med_nota");
+    print("-" * 20);
+  }
+}
+
+// A função principal do programa, onde a execução começa.
+void main() {
+  // Cria uma lista chamada 'estudantes' e a preenche com objetos da classe 'Estudantes'.
+  List<Estudantes> estudantes = [
+    Estudantes("Ana", 25, "Engenharia", matricula: 26793, mediaAluno: 8.5),
+    Estudantes("Bruno", 22, "Medicina", matricula: 34567, mediaAluno: 7.8),
+    Estudantes("Carla", 30, "Direito", matricula: 78045, mediaAluno: 9.3),
+    Estudantes("Daniel", 31, "Arquitetura", matricula: 45678, mediaAluno: 6.9),
+    Estudantes("Terezinha", 23, "Psicologia", matricula: 56789, mediaAluno: 8.2),
+    Estudantes("Felipe", 19, "Engenharia", matricula: 67890, mediaAluno: 6.7),
+    Estudantes("Gabriel", 22, "Psicologia", matricula: 78901, mediaAluno: 7.5),
+    Estudantes("Helho", 24, "Medicina", matricula: 89012, mediaAluno: 9.0),
+    Estudantes("Isabela", 21, "Educação Física", matricula: 10927, mediaAluno: 8.3),
+    Estudantes("João", 26, "Nutricionista", matricula: 11234, mediaAluno: 6.4),
+  ];
+
+  // Este é um loop infinito que mantém o programa em execução até que o usuário decida sair.
+  while (true) {
+    // Exibe o menu principal com as opções disponíveis.
+    print("### Sistema de Gerenciamento de Estudantes ###");
+    print("1. Consultar estudantes");
+    print("2. Sair");
+    stdout.write("Escolha uma opção: ");
+    
+    // Lê a entrada do usuário. O '?' indica que o valor pode ser nulo.
+    String? escolha = stdin.readLineSync();
+
+    // O 'switch' verifica o valor da variável 'escolha'.
+    switch (escolha) {
+      case '1':
+        // Se a escolha for '1', chama a função para consultar estudantes.
+        consultarEstudantes(estudantes);
+        break;
+      case '2':
+        // Se a escolha for '2', exibe uma mensagem de saída e termina o programa.
+        print("Saindo do programa. Até mais!");
+        return;
+      default:
+        // Se a escolha for inválida, exibe uma mensagem de erro.
+        print("Opção inválida. Tente novamente.");
+        break;
+    }
+    print("\n");
+  }
+}
+
+// Esta função gerencia o menu de consulta, guiando o usuário na busca por dados.
+void consultarEstudantes(List<Estudantes> lista) {
+  print("\n--- Consulta de Estudantes ---");
+  stdout.write("Deseja buscar por idade (ida) ou por média (med)? ");
+
+  // Lê a entrada e converte para letras minúsculas.
+  String? campoBusca = stdin.readLineSync()?.toLowerCase();
+
+  // Se o campo de busca for 'ida' ou 'med', prossegue para a busca.
+  if (campoBusca == 'ida' || campoBusca == 'med') {
+    stdout.write("Digite o valor mínimo (maior que), ou deixe em branco: ");
+    String? minInput = stdin.readLineSync();
+    // Tenta converter a entrada para um número decimal. Se falhar, o valor será nulo.
+    double? valorMin = double.tryParse(minInput ?? '');
+
+    stdout.write("Digite o valor máximo (menor que), ou deixe em branco: ");
+    String? maxInput = stdin.readLineSync();
+    double? valorMax = double.tryParse(maxInput ?? '');
+
+    // Chama a função principal de busca com os parâmetros coletados.
+    encontrarEstudantesPorValor(lista, campoBusca, maiorQue: valorMin, menorQue: valorMax);
+  } else {
+    // Exibe uma mensagem de erro se a opção for inválida.
+    print("Opção inválida.");
+  }
+}
+
+// Esta função percorre a lista de estudantes e filtra aqueles que correspondem aos critérios de busca.
+void encontrarEstudantesPorValor(List<Estudantes> lista, String campo, {double? maiorQue, double? menorQue}) {
+  bool encontrado = false;
+  print("\nResultados da busca por $campo:");
+
+  // Itera sobre cada estudante na lista.
+  for (Estudantes estudante in lista) {
+    double valor;
+    if (campo == 'ida') {
+      // Se a busca for por idade, usa a idade do estudante.
+      valor = estudante.idade.toDouble();
+    } else if (campo == 'med') {
+      // Se a busca for por média, usa a média do estudante.
+      valor = estudante.mediaAluno;
+    } else {
+      continue; // Pula para a próxima iteração se o campo for inválido.
+    }
+
+    // Verifica se o valor do estudante atende aos critérios mínimo e máximo.
+    bool atendeMaiorQue = maiorQue == null || valor > maiorQue;
+    bool atendeMenorQue = menorQue == null || valor < menorQue;
+
+    // Se ambos os critérios forem atendidos, exibe os dados do estudante.
+    if (atendeMaiorQue && atendeMenorQue) {
+      estudante.apresentar();
+      encontrado = true;
+    }
+  }
+
+  // Se o loop terminar e nenhum estudante tiver sido encontrado, informa o usuário.
+  if (!encontrado) {
+    print("Nenhum estudante encontrado com os critérios fornecidos.");
+  }
+}
