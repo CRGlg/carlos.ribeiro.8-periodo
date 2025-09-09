@@ -13,6 +13,7 @@ class Estudante {
       {required this.matricula, required this.mediaAluno, required this.tipo});
 }
 
+
 // O ponto de entrada do aplicativo Flutter.
 void main() {
   runApp(const MyApp());
