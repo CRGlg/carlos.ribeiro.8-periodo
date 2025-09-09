@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-// Classe que representa um estudante, com todos os seus atributos.
+// --- ESTRUTURA DE DADOS ---
+// A classe `Estudante` define o "molde" para os objetos que serão manipulados no aplicativo.
+// Cada objeto terá um nome, idade, curso, matrícula, média do aluno e tipo.
 class Estudante {
   String nome;
   int idade;
@@ -9,21 +11,28 @@ class Estudante {
   double mediaAluno;
   String tipo;
 
+  // O construtor é o responsável por inicializar os atributos do objeto.
+  // Os atributos marcados com `required` são obrigatórios na criação de cada estudante.
   Estudante(this.nome, this.idade, this.curso,
       {required this.matricula, required this.mediaAluno, required this.tipo});
 }
 
-// O ponto de entrada do aplicativo Flutter.
+// --- PONTO DE ENTRADA DO APLICATIVO ---
+// A função `main` é o ponto de partida de qualquer aplicativo Flutter.
+// Ela chama `runApp` para iniciar a execução do widget principal.
 void main() {
   runApp(const MyApp());
 }
 
-// Widget principal que define a estrutura básica do aplicativo.
+// --- WIDGET PRINCIPAL IMUTÁVEL ---
+// `MyApp` é um `StatelessWidget`, o que significa que ele não gerencia nenhum estado mutável.
+// Ele serve como a raiz da árvore de widgets, definindo configurações globais como tema e página inicial.
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    // O `MaterialApp` é um widget que configura o aplicativo para seguir o Material Design.
     return MaterialApp(
       title: 'Gerenciamento de Estudantes',
       theme: ThemeData(
@@ -31,26 +40,32 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Inter',
       ),
+      // A página inicial do aplicativo, que é o `StudentListPage`.
       home: const StudentListPage(),
     );
   }
 }
 
-// Widget de estado para gerenciar a lista de estudantes e o estado de filtro.
+// --- WIDGET PRINCIPAL DE ESTADO ---
+// `StudentListPage` é um `StatefulWidget` porque a interface do usuário (UI) pode mudar
+// em tempo real, dependendo da interação do usuário. Ele gerencia a lista de estudantes e os filtros.
 class StudentListPage extends StatefulWidget {
   const StudentListPage({Key? key}) : super(key: key);
 
   @override
+  // Este método cria e retorna a classe de estado associada a este widget.
   _StudentListPageState createState() => _StudentListPageState();
 }
 
+// --- CLASSE DE ESTADO ---
+// Esta classe armazena todos os dados que podem mudar e a lógica que opera sobre esses dados.
 class _StudentListPageState extends State<StudentListPage> {
-  // Estado para controlar o modo claro/escuro da interface.
+  // Variáveis de estado que controlam o comportamento e a aparência da UI.
   bool _isDarkMode = false;
-  // Estado para controlar o modo de ordenação: 0 = original, 1 = nome, 2 = idade.
   int _sortMode = 0;
 
-   final List<Estudante> todosEstudantes = [
+  // Lista original e imutável de estudantes.
+  final List<Estudante> todosEstudantes = [
     Estudante("Ana", 25, "Engenharia", matricula: 26793, mediaAluno: 8.5, tipo: "a+"),
     Estudante("Heitor", 34, "Ciencias Politicas", matricula: 21875, mediaAluno: 8.8, tipo: "b-"),
     Estudante("Bruno", 22, "Medicina", matricula: 34567, mediaAluno: 7.8, tipo: "a+"),
@@ -68,25 +83,32 @@ class _StudentListPageState extends State<StudentListPage> {
     Estudante("Edson", 28, "Educação Física", matricula: 39460, mediaAluno: 7.9, tipo: "a+"),
   ];
 
-
-
+  // A lista que é exibida na tela. Ela é modificada com base nos filtros e na ordenação.
   List<Estudante> estudantesFiltrados = [];
+  
+  // `TextEditingController`s são usados para capturar e gerenciar o texto de campos de entrada.
   final TextEditingController minIdadeController = TextEditingController();
   final TextEditingController maxIdadeController = TextEditingController();
   final TextEditingController minMediaController = TextEditingController();
   final TextEditingController maxMediaController = TextEditingController();
 
+  // --- MÉTODOS DO CICLO DE VIDA ---
+  // `initState()` é chamado quando o widget é inserido na árvore de widgets pela primeira vez.
+  // É o local ideal para inicializar o estado e adicionar "listeners" para eventos externos.
   @override
   void initState() {
     super.initState();
     _aplicarFiltros();
-    // Adiciona listeners para atualizar a lista em tempo real.
+    // Os listeners garantem que os filtros sejam aplicados automaticamente
+    // sempre que o usuário digita algo nos campos de texto.
     minIdadeController.addListener(_aplicarFiltros);
     maxIdadeController.addListener(_aplicarFiltros);
     minMediaController.addListener(_aplicarFiltros);
     maxMediaController.addListener(_aplicarFiltros);
   }
 
+  // `dispose()` é chamado quando o widget é removido da árvore de widgets.
+  // É usado para liberar recursos e evitar vazamentos de memória.
   @override
   void dispose() {
     minIdadeController.dispose();
@@ -96,19 +118,23 @@ class _StudentListPageState extends State<StudentListPage> {
     super.dispose();
   }
 
+  // --- FUNÇÕES DE LÓGICA ---
+  // Esta função aplica os filtros e a ordenação na lista de estudantes.
   void _aplicarFiltros() {
+    // `setState` notifica o framework de que o estado do widget foi alterado,
+    // o que força o Flutter a redesenhar a UI para refletir as mudanças.
     setState(() {
-      // Começa com a lista original para aplicar a ordenação e os filtros.
+      // Cria uma cópia temporária da lista original.
       List<Estudante> tempEstudantes = todosEstudantes.toList();
 
-      // Aplica a ordenação com base no _sortMode.
+      // Lógica de ordenação: a lista é ordenada com base no modo de ordenação atual.
       if (_sortMode == 1) {
         tempEstudantes.sort((a, b) => a.nome.compareTo(b.nome));
       } else if (_sortMode == 2) {
         tempEstudantes.sort((a, b) => b.idade.compareTo(a.idade));
       }
       
-      // Filtra a lista ordenada com base nos campos de texto.
+      // Lógica de filtragem: a lista é filtrada com base nos valores dos campos de texto.
       estudantesFiltrados = tempEstudantes.where((estudante) {
         final double? minIdade = double.tryParse(minIdadeController.text);
         final double? maxIdade = double.tryParse(maxIdadeController.text);
@@ -126,6 +152,8 @@ class _StudentListPageState extends State<StudentListPage> {
     });
   }
 
+  // Esta função limpa o texto em todos os controladores, o que, por sua vez, aciona os listeners
+  // e reverte o filtro.
   void _limparCampos() {
     minIdadeController.clear();
     maxIdadeController.clear();
@@ -133,23 +161,29 @@ class _StudentListPageState extends State<StudentListPage> {
     maxMediaController.clear();
   }
 
+  // Alterna o estado da variável que controla o modo de cores (claro/escuro).
+  // A chamada a `setState` faz com que a UI seja redesenhada com as novas cores.
   void _toggleDarkMode() {
     setState(() {
       _isDarkMode = !_isDarkMode;
     });
   }
 
-  // Alterna o modo de ordenação e aplica os filtros novamente.
+  // Alterna o modo de ordenação, percorrendo os valores de 0, 1 e 2.
+  // Em seguida, chama `_aplicarFiltros` para reordenar a lista.
   void _toggleSort() {
     setState(() {
-      _sortMode = (_sortMode + 1) % 3; // 0 -> 1 -> 2 -> 0
+      _sortMode = (_sortMode + 1) % 3;
     });
     _aplicarFiltros();
   }
 
+  // --- CONSTRUÇÃO DA INTERFACE (UI) ---
+  // O método `build` é responsável por construir a árvore de widgets da interface do usuário.
+  // É chamado sempre que o estado do widget muda.
   @override
   Widget build(BuildContext context) {
-    // Define as cores com base no modo atual.
+    // Variáveis que armazenam as cores com base no modo atual (`_isDarkMode`).
     final Color backgroundColor = _isDarkMode ? Colors.grey.shade900 : Colors.grey.shade200;
     final Color cardColor = _isDarkMode ? Colors.grey.shade800 : Colors.white;
     final Color textColor = _isDarkMode ? Colors.white : Colors.black87;
@@ -157,6 +191,7 @@ class _StudentListPageState extends State<StudentListPage> {
     final Color accentColor = _isDarkMode ? Colors.green.shade200 : Colors.red.shade200;
     final Color iconColor = _isDarkMode ? Colors.green : Colors.red;
 
+    // `Scaffold` é um widget que fornece uma estrutura visual básica.
     return Scaffold(
       backgroundColor: backgroundColor,
       appBar: AppBar(
@@ -195,12 +230,12 @@ class _StudentListPageState extends State<StudentListPage> {
                     ],
                   ),
                 ),
-                // Botões de ação alinhados à direita.
                 SizedBox(
                   height: 48,
                   child: Row(
                     children: [
                       ElevatedButton(
+                        // `onPressed` chama a função que altera a ordenação.
                         onPressed: _toggleSort,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.indigo,
@@ -212,6 +247,7 @@ class _StudentListPageState extends State<StudentListPage> {
                       ),
                       const SizedBox(width: 8),
                       ElevatedButton(
+                        // `onPressed` chama a função que limpa os campos de texto.
                         onPressed: _limparCampos,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
@@ -226,8 +262,8 @@ class _StudentListPageState extends State<StudentListPage> {
                         ),
                       ),
                       const SizedBox(width: 8),
-                      // Botão de alternância de modo escuro.
                       IconButton(
+                        // `onPressed` chama a função que alterna o modo de cores.
                         onPressed: _toggleDarkMode,
                         icon: const Icon(Icons.wb_sunny_rounded, size: 28),
                         color: _isDarkMode ? Colors.yellow.shade700 : Colors.black,
@@ -244,6 +280,7 @@ class _StudentListPageState extends State<StudentListPage> {
               children: [
                 Expanded(
                   child: TextField(
+                    // `controller` conecta o campo de texto ao `TextEditingController`.
                     controller: minIdadeController,
                     keyboardType: TextInputType.number,
                     style: TextStyle(color: textColor),
@@ -315,10 +352,14 @@ class _StudentListPageState extends State<StudentListPage> {
             ),
           ),
           const SizedBox(height: 16),
+          // `Expanded` faz com que o `ListView` ocupe o espaço restante disponível.
           Expanded(
+            // `ListView.builder` constrói a lista de forma eficiente, criando os itens
+            // somente quando eles se tornam visíveis.
             child: ListView.builder(
               itemCount: estudantesFiltrados.length,
               itemBuilder: (context, index) {
+                // Pega o estudante da lista filtrada.
                 final estudante = estudantesFiltrados[index];
                 return Card(
                   elevation: 4,
