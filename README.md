@@ -3,6 +3,11 @@
 <h1 align="center">  ATIVIDADE AVALIAÇÃO PROCESSUAL </h1>  
 #Computação movel // Edgard da Cunha
 
+#
+Carlos Ribeiro Greggio;  
+Eduardo Miranda;
+#
+
 # Sobre o trabalho
 Esta aplicação foi criada uma atividade avaliativa para o curso de sistemas de informação, com o objetivo demonstrar as habilidades no em linguagem Dart e em Flutter do alunos do turma.
 
@@ -17,7 +22,7 @@ Nesta etapa foi criado a estrutura básica do Dart sem o auxílio a interface vi
 
 ![excutando no consolo, sem interface visual](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20183050.png)
 
- Neste ponto foi feito uso de elemendos de controle de dados e repetição (if/else), ......
+Neste ponto foi feito uso de elemendos de controle de entrada "switch" para poder inciar o programa de separar os alunos e também fechar a programa, desta forma as funções "encontrarEstudantesPorValor()" e "consultarEstudantes()" fazem o trabalho de consultar a lista da aplicação separando os separando pela operações ">=" e "<=", e no final o método "apresentar()" chama e exibe o reusltado segundo o conteudo contido em "List<Estudantes>".
 
 
 ## Part2;
@@ -31,8 +36,17 @@ As quatro areias que são para selecionar os alunos que se emcaixão no o usuáo
 ![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20185811.png)
 ![interface sendo usada para seleção de estudantes](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20194230.png)
 ![interface sendo usada para seleção de estudantes](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20195759.png)
+![interface sendo usada para seleção de estudantes](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20220125.png)
 
-  
+No código que foi atualiza do para a parte 2 a principal coisa que vale resaltar, forra os novos elementos visuais, são os "TextEditingController" que atraves dos quadros vão separar os menbras da classee Estudante de acordo com valores macimos e/ou minimos de 'Idade' e/ou 'Média', podendo ser usados os dois alvos de busca simultaneamente. "initState()" é executado uma única vez ao iniciar o widget e por meioda das listeners que detecta uma ou mais alterações e chama a função aplicarFiltros automaticamente, mas tambem possui uma widget 'StatelessWidget' para criação e fiquiçação de um cabeçalho.
+
+
+
+## Part3; 
+Agora vem novas funões e elementos dinamicos que tendem a melorar a experiencia de deichar os recurso estaticos em segundo plano,
+
+
+
   
 
   
