@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+
+
 // Classe que representa um estudante, com todos os seus atributos.
 class Estudante {
   String nome;
@@ -12,6 +14,7 @@ class Estudante {
   Estudante(this.nome, this.idade, this.curso,
       {required this.matricula, required this.mediaAluno, required this.tipo});
 }
+
 
 
 // O ponto de entrada do aplicativo Flutter.
@@ -33,6 +36,40 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Inter',
       ),
       home: const StudentListPage(),
+    );
+  }
+}
+
+// Um widget estático para exibir um cabeçalho.
+
+class StudentListHeader extends StatelessWidget {
+  const StudentListHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Padding(
+      padding: EdgeInsets.fromLTRB(16, 24, 16, 8),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Catálogo de Estudantes',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            'Use os campos abaixo para filtrar os resultados.',
+            style: TextStyle(
+              fontSize: 16,
+              color: Colors.black54,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
@@ -116,10 +153,12 @@ class _StudentListPageState extends State<StudentListPage> {
         title: const Text('Gerenciamento de Estudantes'),
         centerTitle: true,
       ),
+      
       body: Column(
         children: [
+          const StudentListHeader(),
           Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
               children: [
                 Expanded(
@@ -153,7 +192,7 @@ class _StudentListPageState extends State<StudentListPage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
                 Expanded(
