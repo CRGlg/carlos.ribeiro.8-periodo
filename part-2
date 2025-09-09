@@ -1,53 +1,42 @@
 import 'package:flutter/material.dart';
 
-// Este arquivo define uma aplicação Flutter para gerenciar e visualizar uma lista de estudantes.
-
-// A classe Estudante serve como um modelo de dados (POJO) para um estudante,
-// contendo todos os atributos como nome, idade, curso, matrícula, média e tipo sanguíneo.
+// Classe que representa um estudante, com todos os seus atributos.
 class Estudante {
   String nome;
   int idade;
   String curso;
   double matricula;
   double mediaAluno;
-  String tipo; 
-
-  // O construtor inicializa um novo objeto Estudante com todos os atributos necessários.
-
+  String tipo;
 
   Estudante(this.nome, this.idade, this.curso,
       {required this.matricula, required this.mediaAluno, required this.tipo});
 }
 
-// A função main() é o ponto de entrada da aplicação Flutter.
-// Ela chama runApp para iniciar o aplicativo.
+// O ponto de entrada do aplicativo Flutter.
 void main() {
   runApp(const MyApp());
 }
 
-// MyApp é o widget raiz da aplicação.
-// É um StatelessWidget pois sua configuração (como o tema) não muda durante a execução.
+// Widget principal que define a estrutura básica do aplicativo.
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Título da aplicação que aparece na barra de tarefas do sistema operacional.
       title: 'Gerenciamento de Estudantes',
       theme: ThemeData(
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: 'Inter',
       ),
-      // A home é o widget inicial da aplicação, a página principal.
       home: const StudentListPage(),
     );
   }
 }
 
-// StudentListPage é um StatefulWidget pois gerencia um estado mutável,
-// que neste caso é a lista de estudantes filtrada e o conteúdo dos campos de texto.
+// Widget de estado para gerenciar a lista de estudantes e o estado de filtro.
 class StudentListPage extends StatefulWidget {
   const StudentListPage({Key? key}) : super(key: key);
 
@@ -55,52 +44,40 @@ class StudentListPage extends StatefulWidget {
   _StudentListPageState createState() => _StudentListPageState();
 }
 
-
-
-// O estado do StudentListPage.
-// É aqui que a lógica de filtragem e o gerenciamento dos dados acontecem.
 class _StudentListPageState extends State<StudentListPage> {
-  // A lista completa de todos os estudantes, que é a fonte de dados.
+  // Lista de todos os estudantes.
   final List<Estudante> todosEstudantes = [
     Estudante("Ana", 25, "Engenharia", matricula: 26793, mediaAluno: 8.5, tipo: "a+"),
-    Estudante("Bruno", 22, "Medicina", matricula: 34567, mediaAluno: 7.8, tipo: "o-"),
+    Estudante("Bruno", 22, "Medicina", matricula: 34567, mediaAluno: 7.8, tipo: "a+"),
     Estudante("Carla", 30, "Direito", matricula: 78045, mediaAluno: 9.3, tipo: "b+"),
-    Estudante("Daniel", 31, "Arquitetura", matricula: 45678, mediaAluno: 6.9, tipo: "ab+"),
+    Estudante("Daniel", 31, "Arquitetura", matricula: 45678, mediaAluno: 6.9, tipo: "ab-"),
     Estudante("Terezinha", 23, "Psicologia", matricula: 56789, mediaAluno: 8.2, tipo: "a-"),
     Estudante("Felipe", 19, "Engenharia", matricula: 67890, mediaAluno: 6.7, tipo: "b-"),
     Estudante("Gabriel", 22, "Psicologia", matricula: 78901, mediaAluno: 7.5, tipo: "o+"),
-    Estudante("Helho", 24, "Medicina", matricula: 89012, mediaAluno: 9.0, tipo: "ab-"),
+    Estudante("Helho", 24, "Medicina", matricula: 89012, mediaAluno: 9.0, tipo: "b-"),
     Estudante("Isabela", 21, "Educação Física", matricula: 10927, mediaAluno: 8.3, tipo: "a+"),
     Estudante("João", 26, "Nutricionista", matricula: 11234, mediaAluno: 6.4, tipo: "b+"),
-    Estudante("Ricardo", 28, "Ciência da Computação", matricula: 12345, mediaAluno: 9.1, tipo: "o+"),
-    Estudante("Mariana", 20, "Design Gráfico", matricula: 67890, mediaAluno: 8.9, tipo: "a-"),
+    Estudante("Ricardo", 33, "Agronomia", matricula: 30308, mediaAluno: 9.1, tipo: "o+"),
+    Estudante("Marina", 19, "Design Gráfico", matricula: 67890, mediaAluno: 7.9, tipo: "a-"),
   ];
 
-  // A lista de estudantes que é exibida na tela.
-  // Ela muda com base nos critérios de filtro.
   List<Estudante> estudantesFiltrados = [];
-
-  // Controladores para capturar o texto digitado nos campos de entrada.
   final TextEditingController minIdadeController = TextEditingController();
   final TextEditingController maxIdadeController = TextEditingController();
   final TextEditingController minMediaController = TextEditingController();
   final TextEditingController maxMediaController = TextEditingController();
 
-  // O método initState é chamado uma vez quando o widget é criado.
-  // Ele inicializa a lista de estudantes e adiciona "listeners" aos campos de texto
-  // para que o filtro seja ativado a cada alteração.
   @override
   void initState() {
     super.initState();
     estudantesFiltrados = todosEstudantes;
+    // Adiciona listeners para atualizar a lista em tempo real.
     minIdadeController.addListener(_aplicarFiltros);
     maxIdadeController.addListener(_aplicarFiltros);
     minMediaController.addListener(_aplicarFiltros);
     maxMediaController.addListener(_aplicarFiltros);
   }
 
-  // O método dispose é chamado quando o widget é removido da árvore.
-  // É crucial para liberar os recursos dos controladores para evitar vazamento de memória.
   @override
   void dispose() {
     minIdadeController.dispose();
@@ -110,58 +87,41 @@ class _StudentListPageState extends State<StudentListPage> {
     super.dispose();
   }
 
-
-
-  // A função principal de filtragem.
-  // Ela é chamada a cada digitação e atualiza o estado do widget (estudantesFiltrados).
+  // Função para aplicar os filtros de idade e média simultaneamente.
   void _aplicarFiltros() {
-    // setState notifica o framework Flutter que o estado mudou e a interface deve ser redesenhada.
     setState(() {
-      // O método where filtra a lista de todos os estudantes com base nos critérios
-      // definidos nos campos de texto.
       estudantesFiltrados = todosEstudantes.where((estudante) {
         final double? minIdade = double.tryParse(minIdadeController.text);
         final double? maxIdade = double.tryParse(maxIdadeController.text);
         final double? minMedia = double.tryParse(minMediaController.text);
         final double? maxMedia = double.tryParse(maxMediaController.text);
 
-        // Verifica se a idade do estudante está dentro do intervalo.
         final bool atendeIdade = (minIdade == null || estudante.idade >= minIdade) &&
             (maxIdade == null || estudante.idade <= maxIdade);
 
-        // Verifica se a média do estudante está dentro do intervalo.
         final bool atendeMedia = (minMedia == null || estudante.mediaAluno >= minMedia) &&
             (maxMedia == null || estudante.mediaAluno <= maxMedia);
 
-        // Retorna verdadeiro apenas se os dois critérios (idade e média) forem atendidos.
         return atendeIdade && atendeMedia;
       }).toList();
     });
   }
 
-
-
-  // O método build desenha a interface do usuário.
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Define a cor de fundo do scaffold.
       backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        // Barra superior do aplicativo.
         title: const Text('Gerenciamento de Estudantes'),
         centerTitle: true,
       ),
       body: Column(
-        // Um layout de coluna que organiza os widgets verticalmente.
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              // Um layout de linha para alinhar os campos de entrada de idade.
               children: [
                 Expanded(
-                  // Um campo de entrada de texto para a idade mínima.
                   child: TextField(
                     controller: minIdadeController,
                     keyboardType: TextInputType.number,
@@ -176,7 +136,6 @@ class _StudentListPageState extends State<StudentListPage> {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  // Um campo de entrada de texto para a idade máxima.
                   child: TextField(
                     controller: maxIdadeController,
                     keyboardType: TextInputType.number,
@@ -195,10 +154,8 @@ class _StudentListPageState extends State<StudentListPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
-              // Um layout de linha para alinhar os campos de entrada de média.
               children: [
                 Expanded(
-                  // Um campo de entrada de texto para a média mínima.
                   child: TextField(
                     controller: minMediaController,
                     keyboardType: TextInputType.number,
@@ -213,7 +170,6 @@ class _StudentListPageState extends State<StudentListPage> {
                 ),
                 const SizedBox(width: 10),
                 Expanded(
-                  // Um campo de entrada de texto para a média máxima.
                   child: TextField(
                     controller: maxMediaController,
                     keyboardType: TextInputType.number,
@@ -230,25 +186,20 @@ class _StudentListPageState extends State<StudentListPage> {
             ),
           ),
           const SizedBox(height: 16),
-          // ListView.builder é usado para construir uma lista eficiente,
-          // criando apenas os itens que estão visíveis na tela.
-
+          // Usando ListView.builder para exibir a lista de estudantes.
           Expanded(
             child: ListView.builder(
               itemCount: estudantesFiltrados.length,
               itemBuilder: (context, index) {
                 final estudante = estudantesFiltrados[index];
-                // Card é usado para criar uma caixa com elevação e bordas arredondadas para cada item da lista.
                 return Card(
                   elevation: 4,
                   margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  // ListTile é um widget conveniente para exibir uma linha de informações.
                   child: ListTile(
                     contentPadding: const EdgeInsets.all(16),
-                    // O ícone do CircleAvatar exibe a primeira letra do nome do estudante.
                     leading: CircleAvatar(
                       backgroundColor: Colors.red.shade200,
                       child: Text(
@@ -256,12 +207,10 @@ class _StudentListPageState extends State<StudentListPage> {
                         style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
                       ),
                     ),
-                    // Exibe o nome do estudante em negrito.
                     title: Text(
                       estudante.nome,
                       style: const TextStyle(fontWeight: FontWeight.bold),
                     ),
-                    // O subtítulo exibe todas as informações detalhadas do estudante.
                     subtitle: Text(
                       'Idade: ${estudante.idade} | Curso: ${estudante.curso}\nMédia: ${estudante.mediaAluno} | Tipo: ${estudante.tipo.toUpperCase()}\nMatrícula: ${estudante.matricula.toInt()}',
                     ),
