@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// --- ESTRUTURA DE DADOS ---
+
 // A classe `Estudante` define o "molde" para os objetos que serão manipulados no aplicativo.
 // Cada objeto terá um nome, idade, curso, matrícula, média do aluno e tipo.
 class Estudante {
@@ -24,7 +24,7 @@ void main() {
   runApp(const MyApp());
 }
 
-// --- WIDGET PRINCIPAL IMUTÁVEL ---
+
 // `MyApp` é um `StatelessWidget`, o que significa que ele não gerencia nenhum estado mutável.
 // Ele serve como a raiz da árvore de widgets, definindo configurações globais como tema e página inicial.
 class MyApp extends StatelessWidget {
@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// --- WIDGET PRINCIPAL DE ESTADO ---
+
 // `StudentListPage` é um `StatefulWidget` porque a interface do usuário (UI) pode mudar
 // em tempo real, dependendo da interação do usuário. Ele gerencia a lista de estudantes e os filtros.
 class StudentListPage extends StatefulWidget {
@@ -56,8 +56,6 @@ class StudentListPage extends StatefulWidget {
   // Este método cria e retorna a classe de estado associada a este widget.
   _StudentListPageState createState() => _StudentListPageState();
 }
-
-// --- CLASSE DE ESTADO ---
 // Esta classe armazena todos os dados que podem mudar e a lógica que opera sobre esses dados.
 class _StudentListPageState extends State<StudentListPage> {
   // Variáveis de estado que controlam o comportamento e a aparência da UI.
@@ -92,9 +90,10 @@ class _StudentListPageState extends State<StudentListPage> {
   final TextEditingController minMediaController = TextEditingController();
   final TextEditingController maxMediaController = TextEditingController();
 
-  // --- MÉTODOS DO CICLO DE VIDA ---
+
   // `initState()` é chamado quando o widget é inserido na árvore de widgets pela primeira vez.
   // É o local ideal para inicializar o estado e adicionar "listeners" para eventos externos.
+  // MÉTODOS do ciclo de vida.
   @override
   void initState() {
     super.initState();
@@ -108,7 +107,6 @@ class _StudentListPageState extends State<StudentListPage> {
   }
 
   // `dispose()` é chamado quando o widget é removido da árvore de widgets.
-  // É usado para liberar recursos e evitar vazamentos de memória.
   @override
   void dispose() {
     minIdadeController.dispose();
@@ -118,7 +116,7 @@ class _StudentListPageState extends State<StudentListPage> {
     super.dispose();
   }
 
-  // --- FUNÇÕES DE LÓGICA ---
+ 
   // Esta função aplica os filtros e a ordenação na lista de estudantes.
   void _aplicarFiltros() {
     // `setState` notifica o framework de que o estado do widget foi alterado,
