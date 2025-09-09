@@ -1,0 +1,357 @@
+import 'package:flutter/material.dart';
+
+// Classe que representa um estudante, com todos os seus atributos.
+class Estudante {
+  String nome;
+  int idade;
+  String curso;
+  double matricula;
+  double mediaAluno;
+  String tipo;
+
+  Estudante(this.nome, this.idade, this.curso,
+      {required this.matricula, required this.mediaAluno, required this.tipo});
+}
+
+// O ponto de entrada do aplicativo Flutter.
+void main() {
+  runApp(const MyApp());
+}
+
+// Widget principal que define a estrutura básica do aplicativo.
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Gerenciamento de Estudantes',
+      theme: ThemeData(
+        primarySwatch: Colors.indigo,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: 'Inter',
+      ),
+      home: const StudentListPage(),
+    );
+  }
+}
+
+// Widget de estado para gerenciar a lista de estudantes e o estado de filtro.
+class StudentListPage extends StatefulWidget {
+  const StudentListPage({Key? key}) : super(key: key);
+
+  @override
+  _StudentListPageState createState() => _StudentListPageState();
+}
+
+class _StudentListPageState extends State<StudentListPage> {
+  // Estado para controlar o modo claro/escuro da interface.
+  bool _isDarkMode = false;
+  // Estado para controlar o modo de ordenação: 0 = original, 1 = nome, 2 = idade.
+  int _sortMode = 0;
+
+   final List<Estudante> todosEstudantes = [
+    Estudante("Ana", 25, "Engenharia", matricula: 26793, mediaAluno: 8.5, tipo: "a+"),
+    Estudante("Heitor", 34, "Ciencias Politicas", matricula: 21875, mediaAluno: 8.8, tipo: "b-"),
+    Estudante("Bruno", 22, "Medicina", matricula: 34567, mediaAluno: 7.8, tipo: "a+"),
+    Estudante("Carla", 30, "Direito", matricula: 78045, mediaAluno: 9.3, tipo: "b+"),
+    Estudante("yasmim", 27, "Direito", matricula: 94674, mediaAluno: 8.0, tipo: "b+"),
+    Estudante("Daniel", 31, "Arquitetura", matricula: 45678, mediaAluno: 6.9, tipo: "ab-"),
+    Estudante("Terezinha", 23, "Psicologia", matricula: 56789, mediaAluno: 8.2, tipo: "a-"),
+    Estudante("Felipe", 19, "Engenharia", matricula: 67890, mediaAluno: 6.7, tipo: "b-"),
+    Estudante("Gabriel", 22, "Psicologia", matricula: 78901, mediaAluno: 7.5, tipo: "o+"),
+    Estudante("Helho", 24, "Medicina", matricula: 89012, mediaAluno: 9.0, tipo: "b-"),
+    Estudante("Isabela", 21, "Educação Física", matricula: 10927, mediaAluno: 8.3, tipo: "a+"),
+    Estudante("João", 26, "Nutricionista", matricula: 11234, mediaAluno: 6.4, tipo: "b+"),
+    Estudante("Ricardo", 33, "Agronomia", matricula: 30308, mediaAluno: 9.1, tipo: "o+"),
+    Estudante("Marina", 19, "Design Gráfico", matricula: 67890, mediaAluno: 7.9, tipo: "a-"),
+    Estudante("Edson", 28, "Educação Física", matricula: 39460, mediaAluno: 7.9, tipo: "a+"),
+  ];
+
+
+
+  List<Estudante> estudantesFiltrados = [];
+  final TextEditingController minIdadeController = TextEditingController();
+  final TextEditingController maxIdadeController = TextEditingController();
+  final TextEditingController minMediaController = TextEditingController();
+  final TextEditingController maxMediaController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _aplicarFiltros();
+    // Adiciona listeners para atualizar a lista em tempo real.
+    minIdadeController.addListener(_aplicarFiltros);
+    maxIdadeController.addListener(_aplicarFiltros);
+    minMediaController.addListener(_aplicarFiltros);
+    maxMediaController.addListener(_aplicarFiltros);
+  }
+
+  @override
+  void dispose() {
+    minIdadeController.dispose();
+    maxIdadeController.dispose();
+    minMediaController.dispose();
+    maxMediaController.dispose();
+    super.dispose();
+  }
+
+  void _aplicarFiltros() {
+    setState(() {
+      // Começa com a lista original para aplicar a ordenação e os filtros.
+      List<Estudante> tempEstudantes = todosEstudantes.toList();
+
+      // Aplica a ordenação com base no _sortMode.
+      if (_sortMode == 1) {
+        tempEstudantes.sort((a, b) => a.nome.compareTo(b.nome));
+      } else if (_sortMode == 2) {
+        tempEstudantes.sort((a, b) => b.idade.compareTo(a.idade));
+      }
+      
+      // Filtra a lista ordenada com base nos campos de texto.
+      estudantesFiltrados = tempEstudantes.where((estudante) {
+        final double? minIdade = double.tryParse(minIdadeController.text);
+        final double? maxIdade = double.tryParse(maxIdadeController.text);
+        final double? minMedia = double.tryParse(minMediaController.text);
+        final double? maxMedia = double.tryParse(maxMediaController.text);
+
+        final bool atendeIdade = (minIdade == null || estudante.idade >= minIdade) &&
+            (maxIdade == null || estudante.idade <= maxIdade);
+
+        final bool atendeMedia = (minMedia == null || estudante.mediaAluno >= minMedia) &&
+            (maxMedia == null || estudante.mediaAluno <= maxMedia);
+
+        return atendeIdade && atendeMedia;
+      }).toList();
+    });
+  }
+
+  void _limparCampos() {
+    minIdadeController.clear();
+    maxIdadeController.clear();
+    minMediaController.clear();
+    maxMediaController.clear();
+  }
+
+  void _toggleDarkMode() {
+    setState(() {
+      _isDarkMode = !_isDarkMode;
+    });
+  }
+
+  // Alterna o modo de ordenação e aplica os filtros novamente.
+  void _toggleSort() {
+    setState(() {
+      _sortMode = (_sortMode + 1) % 3; // 0 -> 1 -> 2 -> 0
+    });
+    _aplicarFiltros();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // Define as cores com base no modo atual.
+    final Color backgroundColor = _isDarkMode ? Colors.grey.shade900 : Colors.grey.shade200;
+    final Color cardColor = _isDarkMode ? Colors.grey.shade800 : Colors.white;
+    final Color textColor = _isDarkMode ? Colors.white : Colors.black87;
+    final Color subtitleColor = _isDarkMode ? Colors.yellow.shade700 : Colors.black54;
+    final Color accentColor = _isDarkMode ? Colors.green.shade200 : Colors.red.shade200;
+    final Color iconColor = _isDarkMode ? Colors.green : Colors.red;
+
+    return Scaffold(
+      backgroundColor: backgroundColor,
+      appBar: AppBar(
+        title: Text('Gerenciamento de Estudantes', style: TextStyle(color: textColor)),
+        centerTitle: true,
+        backgroundColor: _isDarkMode ? Colors.black : Colors.indigo,
+      ),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 24.0, 16.0, 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Catálogo de Estudantes',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: textColor,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Use os campos abaixo para filtrar os resultados.',
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: subtitleColor,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                // Botões de ação alinhados à direita.
+                SizedBox(
+                  height: 48,
+                  child: Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: _toggleSort,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.indigo,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text('Ordenar', style: TextStyle(color: Colors.white)),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: _limparCampos,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'Zerar',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      // Botão de alternância de modo escuro.
+                      IconButton(
+                        onPressed: _toggleDarkMode,
+                        icon: const Icon(Icons.wb_sunny_rounded, size: 28),
+                        color: _isDarkMode ? Colors.yellow.shade700 : Colors.black,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: minIdadeController,
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(color: textColor),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
+                      labelText: 'Idade Mínima',
+                      labelStyle: TextStyle(color: subtitleColor),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: TextField(
+                    controller: maxIdadeController,
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(color: textColor),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
+                      labelText: 'Idade Máxima',
+                      labelStyle: TextStyle(color: subtitleColor),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: minMediaController,
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(color: textColor),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
+                      labelText: 'Média Mínima',
+                      labelStyle: TextStyle(color: subtitleColor),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: TextField(
+                    controller: maxMediaController,
+                    keyboardType: TextInputType.number,
+                    style: TextStyle(color: textColor),
+                    decoration: InputDecoration(
+                      contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
+                      labelText: 'Média Máxima',
+                      labelStyle: TextStyle(color: subtitleColor),
+                      border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(12)),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              itemCount: estudantesFiltrados.length,
+              itemBuilder: (context, index) {
+                final estudante = estudantesFiltrados[index];
+                return Card(
+                  elevation: 4,
+                  color: cardColor,
+                  margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: ListTile(
+                    contentPadding: const EdgeInsets.all(16),
+                    leading: CircleAvatar(
+                      backgroundColor: accentColor,
+                      child: Text(
+                        estudante.nome[0],
+                        style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
+                      ),
+                    ),
+                    title: Text(
+                      estudante.nome,
+                      style: TextStyle(fontWeight: FontWeight.bold, color: textColor),
+                    ),
+                    subtitle: Text(
+                      'Idade: ${estudante.idade} | Curso: ${estudante.curso}\nMédia: ${estudante.mediaAluno} | Tipo: ${estudante.tipo.toUpperCase()}\nMatrícula: ${estudante.matricula.toInt()}',
+                      style: TextStyle(color: subtitleColor),
+                    ),
+                    trailing: Icon(Icons.square, color: iconColor),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
