@@ -31,6 +31,7 @@ já na parte 2 o código teve de ser autorizado para incluir os elementos fort-e
 As quatro areias que são para selecionar os alunos que se emcaixão no o usuáoria determinar, as buscas poden ser feitas estabelecendo um teto e/ou chão para os critérios de 'médio' e/ou 'idade' e demais informações dos alunos sendo apresentadas nos perfis dos mesmos.
 
   https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/7dcd5cbf7fc3e6687ac6aabf64fa4a1430a5687f/part-2
+  https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/4d583695785ef79871ae26761b1fb3c663ab9dd8/part-2
 
 ![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20184554.png)
 ![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20185811.png)
