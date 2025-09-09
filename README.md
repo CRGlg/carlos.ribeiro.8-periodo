@@ -17,7 +17,7 @@ Ne caso foi feito um sistema de munitoria de alunos de encino superior de de dif
 ## Part1;
 Nesta etapa foi criado a estrutura básica do Dart sem o auxílio a interface visual do Flutter, desta forma podendo apenas ser usado no console. O programa oferece duas opções 1 para utilizar o sistema e opção 2 para desligar o sistema, E na opção existem duas linhas de ação que podem ser toma das por curas filtrando por 'idade' ou 'média', que no caso são 'ide' e 'med' repequitivamente. Atraves das operações '>', '<', '=>' e '<=' para encontrar os estudantes que se enquadrão.
 
-  https://github.com/CRGlg/carlos.ribeiro.8-periodo/commit/b1b5609345f202c85be0992c80646bbb943d18dd
+  https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-1Dart
   
 
 ![excutando no consolo, sem interface visual](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20183050.png)
@@ -30,7 +30,7 @@ já na parte 2 o código teve de ser autorizado para incluir os elementos fort-e
 
 As quatro areias que são para selecionar os alunos que se emcaixão no o usuáoria determinar, as buscas poden ser feitas estabelecendo um teto e/ou chão para os critérios de 'médio' e/ou 'idade' e demais informações dos alunos sendo apresentadas nos perfis dos mesmos.
 
-  https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/7dcd5cbf7fc3e6687ac6aabf64fa4a1430a5687f/part-2
+  https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-2Dart
 
 ![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20184554.png)
 ![interface sendo usada para seleção de estudantes](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20194230.png)
@@ -45,8 +45,7 @@ No código que foi atualiza do para a parte 2 a principal coisa que vale resalta
 Agora vem novas funões e elementos dinamicos que tendem a melorar a experiencia de deichar os recurso estaticos em segundo plano. As 3 grandes novidades são 3 botões um que vão alternar entre o modo de tela clara e tela escura, outro que vai zerar as caixas de texto e mais um que vai ordenar por ordem alfabética ou ordem por idade decrescente (do mais velho ao mais novo), assim organizando o processo de busca de forma mais clara e com recusos visuais que ajudam na atenção.
 
 
-https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-3
-
+  https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-3Dart
 
 
   
