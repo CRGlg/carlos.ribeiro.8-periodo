@@ -46,6 +46,7 @@ No código que foi atualiza do para a parte 2 a principal coisa que vale resalta
 Agora vem novas funões e elementos dinamicos que tendem a melorar a experiencia de deichar os recurso estaticos em segundo plano,
 
 
+https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-3
 
   
 ![tela de verção anterior em execução](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Imagem%20do%20WhatsApp%20de%202025-09-09%20%C3%A0(s)%2010.11.33_a02732d6.jpg)
