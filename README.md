@@ -59,7 +59,7 @@ https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-3
   
 
 
-
+O componente principal do código "StudentListPage"  que é um StatefulWidget. Essa widget mutavel é essencial para o funcionamento do aplicativo, pois ele precisa gerenciar um estado mutável, ou seja, dados que mudam ao longo do tempo e afetam a interface do usuário, justamente na "StudentListPageState" é onde a essência de todas as coisas acontecem todas as filtragens, todas as ordenações e mudanças que são refletidas na interface visual do flutter. Para que a mudansas que os novos botões fazem o método "setState()" por meio dele o framework flutter sabe o estado interno do widget, quando alterado movimenta para a interface ser reconstruída para refletir as novas informações, o botão "Ordenar" quando acionado atualiza o widget com o novo modo de ordenação que vai estar de acrodo com os requisitos de logicos da função.  
 
 
 
