@@ -33,7 +33,6 @@ As quatro areias que são para selecionar os alunos que se emcaixão no o usuáo
   https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/7dcd5cbf7fc3e6687ac6aabf64fa4a1430a5687f/part-2
 
 ![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20184554.png)
-![interface da tela do android mostrando como ficou](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20185811.png)
 ![interface sendo usada para seleção de estudantes](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20194230.png)
 ![interface sendo usada para seleção de estudantes](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20195759.png)
 ![interface sendo usada para seleção de estudantes](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-08%20220125.png)
@@ -52,7 +51,7 @@ https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-3
 ![tela de verção anterior em execução](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Imagem%20do%20WhatsApp%20de%202025-09-09%20%C3%A0(s)%2010.11.33_a02732d6.jpg)
 
 
-![tela de verção anterior em execução22]()  
+![tela de verção anterior em execução22](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-09%20154716.png)  
 
 
   
