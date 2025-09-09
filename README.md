@@ -47,12 +47,14 @@ Agora vem novas funões e elementos dinamicos que tendem a melorar a experiencia
 
 https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/part-3
 
+
+
   
-![tela de verção anterior em execução](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Imagem%20do%20WhatsApp%20de%202025-09-09%20%C3%A0(s)%2010.11.33_a02732d6.jpg)
+![tela de verção anterior em execução](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-09%20154654.png)
 
 
 ![tela de verção anterior em execução22](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-09%20154716.png)  
-
+![tela da app rodando](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Captura%20de%20tela%202025-09-09%20154802.png)
 
   
 
