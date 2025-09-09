@@ -48,8 +48,8 @@ Agora vem novas funões e elementos dinamicos que tendem a melorar a experiencia
 
 
   
-
-  
+![tela de verção anterior em execução](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Imagem%20do%20WhatsApp%20de%202025-09-09%20%C3%A0(s)%2010.11.33_a02732d6.jpg)
+![tela de verção anterior em execução](https://github.com/CRGlg/carlos.ribeiro.8-periodo/blob/main/MATERILvisual/Imagem%20do%20WhatsApp%20de%202025-09-09%20%C3%A0(s)%2010.11.34_cdb9f210.jpg)  
 
 
   
